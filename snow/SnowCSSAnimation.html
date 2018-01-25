@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>		
+	<style>
+	/*设置雪花背景图片*/	
+	.snow{
+		background-image:
+			url("images/snow10.png"),
+			url("images/snow15.png"),
+			url("images/snow20.png");
+		position:absolute;
+		left:0;
+		right:0;
+		width:100%;
+		height:100;
+		z-index:1;
+		animation:snowfall 30s linear infinite;
+	}
+	/*设置下雪动画*/
+	@keyframes snowfall{
+	0%{background-position:0 0,0 0,0 0;}
+	100%{background-position:200px 500px,-200px 600px,200px 1000px;}
+	}	
+	</style>	
+	</head>
+	
+	<body>
+		<div>
+			<!--添加背景图片-->
+			<img  style="width:100%; filter:grayscale(100%);" src="images/wa1.jpg" alt="魔都.jpg">
+			<!--添加下雪的遮罩-->
+			<div class="snow" style="position:absolute;top:0;left:0; width:100%;height:100%;"></div>
+		</div>	
+	</body>
+</html>
