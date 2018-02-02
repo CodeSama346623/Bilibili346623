@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CSS 月食动画</title>
+	<style>
+	body{
+		height:100%;
+		width:100;
+		background:#61686b;
+		animation:sky 5s ease 1s infinite;	
+	}
+	svg #shadow{
+	transform:translateX(200px);
+	animation:shadow 5s ease 1s infinite;
+	}
+	
+	@keyframes sky{
+	0%{ background:#61686b;}
+	45%,55%{background:#2C3E50;}
+	100%{background:#61686b;}
+	
+	}
+	@keyframes shadow{
+	0%{transform:translateX(200px);fill:#61686b;}
+	45%,55%{transform:translateX(0px);fill:#2C3E50;}
+	100%{transform:translateX(-200px);fill:#61686b;}
+	
+	}
+	
+	
+	
+	
+	
+	</style>
+</head>
+<body>
+<svg height="200" width="200">
+<defs>
+	<radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx"50%" fy="50%">
+	<stop offset="0%" style="stop-color:rgb(230,230,229);stop-opacity:1" />
+	<stop offset="100%" style="stop-color:rgb(97,104,107);stop-opacity:0.9" />	
+	</radialGradient>
+</defs>
+<defs>
+	<filter id="f1" x="0" y="0">
+		<feGaussianBlur in="SourceGraphic" stdDeviation="30" />
+	</filter>
+</defs>
+<mask id="mask1">
+	<rect width="200" height="200" fill="black" />
+	<circle cx="100" cy="100" r="100" fill="white" />
+</mask>
+
+
+
+<circle id="moon" cx="100" cy="100" r="100" fill='url(#grad1)' />
+<circle id="shadow" cx="100" cy="100" r="100" fill="black" filter="url(#f1)" mask="url(#mask1)" />
+</svg>
+
+<body>
+
+</html>
