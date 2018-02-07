@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style>
+	.bgdark{background-color:#91A8D0;}
+	.snow{
+		background-image:
+				url(https://image.ibb.co/k0aqx6/snow.png), 
+				url(https://image.ibb.co/eCahc6/snow1.png), 
+				url(https://image.ibb.co/bOboH6/snow2.png);
+		width: 100%;
+		height:100%;
+		position: absoulute;
+		top: 0;
+		left: 0;
+		z-index:100;
+		animation: snow 20s linear infinite;
+		}
+	@keyframes snow {
+		from {background-position: 0px 0px, 0px 0px, 0px 0px;}
+		to {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+	}
+	</style>
+	</head>
+	<body class="bgdark">
+	<div class="container-fluid">
+		<div class="media  snow" style="padding:30px 0;">
+			<div class="media-left">
+					<img src="images/CodeSamaLogo.png" class="media-object img-thumbnail img-circle" style="width:190px;height:190px;">
+			</div>
+			<div class="media-body ">
+				<h3 class="media-heading">
+				代码君CodeSama  开播第<strong id="livedate" class="text-danger">27天</strong>了，(*^▽^*)
+				</h3>
+				<div class="container-fluid">
+					<h4 style="">直播进度 (晚上8点左右开播，11点半下播):</h4>
+					<div class="progress " style="padding:0;">				
+							<div id="pbar" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+								aira-valuenow="40" aria-value-min="0" aria-value-max="100" style="width:0%;">0%</div>
+						</div>
+				</div>
+					
+			</div>	
+		</div>	
+		<script>
+				//自动修改直播天数
+				changeLiveDate();
+				function changeLiveDate(){
+				var date= new Date();
+				var beginning= new Date("2017-12-28 20:00:00");//开始直播的时间
+				diffdate=Math.round((date-beginning)/(1000*60*60*24));
+				livedate=document.getElementById("livedate")
+				livedate.innerHTML=diffdate+"天";
+				}
+				
+				//自动修改直播进度
+				var myVar = setInterval(progress,1*1000);
+				function progress(){
+					var timenow= new Date();
+					var liveStart=new Date();
+					liveStart.setHours(20);
+					liveStart.setMinutes(0);
+					liveStart.setSeconds(0);
+					var liveEnd= new Date();
+					liveEnd.setHours(23);
+					liveEnd.setMinutes(30);
+					liveEnd.setSeconds(0);
+					
+					//修改直播开始时间和时长				
+					//var prog=(((hour*60+minute)*60+second-((12*60+0)*60+0))/(3.5*60*60)*100).toFixed(2);
+					var prog=((timenow-liveStart)/(liveEnd-liveStart)*100).toFixed(2);
+					pbar=document.getElementById("pbar");
+					//console.log(liveEnd)
+					if (prog>=0){
+					pbar.innerHTML=prog+'%';
+					pbar.style.width=prog+"%";
+					}else{
+					pbar.innerHTML =0+'%';
+					pbar.style.width=0+'%';
+					}
+					
+					}
+					
+			</script>	
+	
+	</div>
+	
+	</body>	
+</html>
