@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style>
+	.bgdark{background-color:#91A8D0;}
+	.snow{
+		background-image:
+				url(https://image.ibb.co/k0aqx6/snow.png), 
+				url(https://image.ibb.co/eCahc6/snow1.png), 
+				url(https://image.ibb.co/bOboH6/snow2.png);
+		width: 100%;
+		height:100%;
+		position: absoulute;
+		top: 0;
+		left: 0;
+		z-index:100;
+		animation: snow 20s linear infinite;
+		}
+	@keyframes snow {
+		from {background-position: 0px 0px, 0px 0px, 0px 0px;}
+		to {background-position: 500px 1000px, 200px 400px, -100px 300px;}
+	}
+		.panel h4,.media h4,.media h3,.notices h3, .notices h4,.notices a{color:#FFFFFF;}
+		.dalao p{color:#FFFFFF;}
+		.dalao1{background-color:#6B5B95;}
+		.dalaolist{background-color:#00A591;}
+		.dalaolist img{width:100%;}
+		.dalao2{background-color:#6F9FD8;}
+		.dalao3{background-color:#92B558;}
+
+	</style>
+	</head>
+	<body class="bgdark">
+	<div class="container-fluid">
+		<div class="media  snow" style="padding:30px 0;">
+			<div class="media-left">
+					<img src="images/CodeSamaLogo.png" class="media-object img-thumbnail img-circle" style="width:190px;height:190px;">
+			</div>
+			<div class="media-body ">
+				<h3 class="media-heading">
+				代码君CodeSama  开播第<strong id="livedate" class="text-danger">27天</strong>了，(*^▽^*)
+				</h3>
+				<div class="container-fluid">
+					<h4 style="">直播进度 (晚上8点左右开播，11点半下播):</h4>
+					<div class="progress " style="padding:0;">				
+							<div id="pbar" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+								aira-valuenow="40" aria-value-min="0" aria-value-max="100" style="width:0%;">0%</div>
+						</div>
+				</div>
+					
+			</div>	
+		</div>	
+		<script>
+				//自动修改直播天数
+				changeLiveDate();
+				function changeLiveDate(){
+				var date= new Date();
+				var beginning= new Date("2017-12-28 20:00:00");//开始直播的时间
+				diffdate=Math.round((date-beginning)/(1000*60*60*24));
+				livedate=document.getElementById("livedate")
+				livedate.innerHTML=diffdate+"天";
+				}
+				
+				//自动修改直播进度
+				var myVar = setInterval(progress,1*1000);
+				function progress(){
+					var timenow= new Date();
+					var liveStart=new Date();
+					liveStart.setHours(20);
+					liveStart.setMinutes(0);
+					liveStart.setSeconds(0);
+					var liveEnd= new Date();
+					liveEnd.setHours(23);
+					liveEnd.setMinutes(30);
+					liveEnd.setSeconds(0);
+					
+					//修改直播开始时间和时长				
+					//var prog=(((hour*60+minute)*60+second-((12*60+0)*60+0))/(3.5*60*60)*100).toFixed(2);
+					var prog=((timenow-liveStart)/(liveEnd-liveStart)*100).toFixed(2);
+					pbar=document.getElementById("pbar");
+					//console.log(liveEnd)
+					if (prog>=0){
+					pbar.innerHTML=prog+'%';
+					pbar.style.width=prog+"%";
+					}else{
+					pbar.innerHTML =0+'%';
+					pbar.style.width=0+'%';
+					}
+					
+					}
+					
+			</script>	
+	
+	</div>
+	<!--喝水+晚安-->
+	<div class="notices container-fluid">
+		<ul class="nav nav-tabs" >
+			<li class="active" ><a  data-toggle="tab" href="#drink">喝水</a></li>
+			<li ><a data-toggle="tab" href="#goodnight">晚安</a></li>
+			<li ><a data-toggle="tab" href="#nagging">吐槽</a></li>
+		</ul>
+		<div class="tab-content  text-center">
+			<div id="drink" class="tab-pane fade in active">
+				<h3>Up去核电水~</h3>
+				<h4><strong>大佬们</strong>请点“关注”mark一下，或者投根辣条，谢谢~<br></h4>
+			</div>
+			<div id="goodnight" class="tab-pane fade">
+				<h3>今天就到这儿啦~去刷牙了</h3>
+				<h4><strong>大佬们</strong>请点“关注”mark一下，或者投根辣条，谢谢~<br></h4>
+			</div>
+			<div id="nagging" class="tab-pane fade">
+				<h3>今天投了Echarts制作字符云的视频，大家有空可以去看看</h3>
+				<h4><strong>大佬们</strong>请点“关注”mark一下，或者投根辣条，谢谢~<br></h4>
+			</div>		
+		</div>
+	<div><!--END 喝水+晚安-->
+	<div class="panel bgdark">
+		<div class="panel-heading container-fluid "><h4><strong>感谢大佬们的小礼物：</strong><h4></div>
+		<div class="panel-body">
+		<div class="container-fluid row">
+			<div class="col-xs-3 text-center dalao dalao1" >
+					<h4><strong>山里一泼猴</strong></h4>
+					<img class="img-thumbnail img-circle" src="images\山里一泼猴.jpg" alt="大佬头像" style="width:100%;">
+					<div id="monkey">
+						<h4>Bilibili同桌</h4>
+						<p><del>正在直播</del><strong></strong></p>
+					</div>
+				</div>
+			<div class="col-xs-3 text-center dalao dalao2">
+					<h4 class="text-info"><strong>隔壁街老王</strong></h4>					
+					<img class="img-thumbnail img-circle" src="images\隔壁街老王.jpg" alt="大佬头像" style="width:100%;">					
+					<div id="laowang">
+						<h4>经常串门的大佬</h4>
+						<p>绿了一条街，233</p>						
+					</div>
+				</div>
+			<div class="col-xs-3 text-center dalao dalao3">
+					<h4 class="text-info"><strong>MrChinico</strong></h4>					
+					<img class="img-thumbnail img-circle" src="images\MrChinico.jpg" alt="大佬头像" style="width:100%;">					
+					<div id="laowang">
+						<h4>经常⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄的大佬</h4>
+						<p>监督学习，超严厉的</p>						
+					</div>
+				</div>
+			<div class="col-xs-3 dalao dalaolist">
+					<h4 class="text-warning"><strong>投喂过的大佬:</strong></h4>
+					<div id="myCarousel" class=" carousel slide " data-ride="carousel">
+						<div class="carousel-inner  text-center" role="listbox">
+							<div class="item active">
+								<img class="img-thumbnail img-circle" src="images\Christer.jpg" alt="Christer">
+								<div>
+									<h4>ChYFx_Christer</h4>
+									<p>C#大佬</p><!--ChYFx_ChristerC -->
+								</div>
+							</div>
+							<div class="item">
+								<img class="img-thumbnail img-circle" src="images\这里有蜘蛛.jpg" alt="SuperPaxxs">
+								<div>
+									<h4>这里有蜘蛛°</h4>
+									<p>给予鼓励的大佬</p>
+								</div>							
+							</div>
+							<div class="item">
+								<img class="img-thumbnail img-circle" src="images\盒饭工作室.jpg" alt="盒饭工作室">
+								<div>
+									<h4>盒饭工作室</h4>
+									<p>B站直播UP</p>
+								</div>							
+							</div>
+							<div class="item">
+								<img class="img-thumbnail img-circle" src="images\SuperPaxxs.jpg" alt="SuperPaxxs">
+								<div>
+									<h4>SuperPaxxs</h4>
+									<p>对直播撸码很惊讶的大佬</p>
+								</div>							
+							</div>
+						</div>
+					</div>
+			</div>	
+		</div>
+		</div>
+	</div>
+
+	</body>	
+</html>
