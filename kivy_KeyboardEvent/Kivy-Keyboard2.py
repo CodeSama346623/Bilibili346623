@@ -5,6 +5,9 @@ from kivy.uix.image import Image, AsyncImage
 ##from kivy.core.window import Keyboard
 from kivy.core.window import Window
 
+# keycode
+# https://kivy.org/docs/_modules/kivy/core/window.html
+
 
 gifFilename=[".\\Gif2.gif",".\\Gif3.gif",".\\Gif4.gif"]
 giflistlen=len(gifFilename)
