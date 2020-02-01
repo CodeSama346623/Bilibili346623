@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="echarts.min.js"></script>
+	<script src = "china.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1280px;height:720px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+		var name_title = "2018年各地区生产总值（亿元）"
+        var mapName = 'china'
+        var data = [
+        { name: '广东', value: 97277.77 },
+		{ name: '江苏', value: 92595.4 },
+		{ name: '山东', value: 76469.67 },
+		{ name: '浙江', value: 56197.15 },
+		{ name: '河南', value: 48055.86 },
+		{ name: '四川', value: 40678.13 },
+		{ name: '湖北', value: 39366.55 },
+		{ name: '湖南', value: 36425.78 },
+		{ name: '河北', value: 36010.27 },
+		{ name: '福建', value: 35804.04 },
+		{ name: '上海', value: 32679.87 },
+		{ name: '北京', value: 30319.98 },
+		{ name: '安徽', value: 30006.82 },
+		{ name: '辽宁', value: 25315.35 },
+		{ name: '陕西', value: 24438.32 },
+		{ name: '江西', value: 21984.78 },
+		{ name: '重庆', value: 20363.19 },
+		{ name: '广西', value: 20352.51 },
+		{ name: '天津', value: 18809.64 },
+		{ name: '云南', value: 17881.12 },
+		{ name: '内蒙古', value: 17289.22 },
+		{ name: '山西', value: 16818.11 },
+		{ name: '黑龙江', value: 16361.62 },
+		{ name: '吉林', value: 15074.62 },
+		{ name: '贵州', value: 14806.45 },
+		{ name: '新疆', value: 12199.08 },
+		{ name: '甘肃', value: 8246.07 },
+		{ name: '海南', value: 4832.05 },
+		{ name: '宁夏', value: 3705.18 },
+		{ name: '青海', value: 2865.23 },
+		{ name: '西藏', value: 1477.63 }
+
+        ];
+        
+        var option = {
+            title: {
+                text: name_title,
+                x: 'center',
+                textStyle: {
+                    fontSize: 24
+                },                
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: function(params) {                        
+                        var toolTiphtml = ''
+						if (isNaN(params.value)){
+                        toolTiphtml = params.name + 'GDP: 0 亿元'
+						}else{
+						toolTiphtml = params.name + 'GDP: ' + params.value + '亿元'
+						}
+                        //console.log(toolTiphtml)                        
+                        return toolTiphtml;                   
+                }
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            visualMap: {
+                show: true,
+                left: 'left',
+                top: 'bottom',
+                seriesIndex: [0],
+                type:'piecewise',
+                pieces:[
+                    {min:80000, color: 'rgb(254,57,101)'},
+                    {min:60000, max:79999, color: 'rgb(252,157,154)'},
+                    {min:40000, max:59999, color: 'rgb(249,205,173)'},
+                    {min:20000, max:39999, color: 'rgb(200,200,169)'},
+                    {min:0, max:19999, color: 'rgb(131,175,155)'},
+                ],            
+                textStyle: {
+                    color: '#000000'
+                }
+            },            
+            geo: {
+                show: true,
+                map: mapName,
+                label: {
+                    normal: {
+                        show: true,
+                        fontSize:12,
+                    },
+                    emphasis: {
+                        show: false,
+                    }
+                },
+                roam: false,
+                itemStyle: {
+                    normal: {
+                        areaColor: '#FFFFFF',
+                        borderColor: '#666666',
+                    },
+                    emphasis: {
+                        areaColor: '#0099CC',
+                    }
+                }
+            },
+            series: [
+                {
+                    type: 'map',
+                    map: mapName,
+                    geoIndex: 0,           
+                    animation: false,
+                    data: data
+                },
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
