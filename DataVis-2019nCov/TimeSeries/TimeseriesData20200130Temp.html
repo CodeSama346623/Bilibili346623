@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1824px;height:1026px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '新型冠状病毒疫情时间序列数据图'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+			toolbox: {
+				feature: {
+					saveAsImage: {}
+				}
+			},
+            legend: {                
+            },
+            dataset:{
+                source:[
+                    ['date','确诊','疑似','死亡','治愈'],
+//dataInsert//
+                ]
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                type:'category',
+                //boundaryGap:false,
+                axisPointer: {
+                type: 'shadow'
+                }
+                },
+                {
+                type:'category',
+                boundaryGap:true,
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLabel:{
+                    show:false
+                },
+                axisPointer: {
+                type: 'shadow'
+                }
+                }
+            ],
+            yAxis:[ 
+                {
+                name:'确诊、疑似',
+                type:'value',
+                max://maxOne//,
+                interval://intervalOne//
+                },
+                {
+                name:'死亡、治愈',
+                type:'value',
+                max://maxTwo//,
+                interval://intervalTwo//
+                }
+            ],
+            series: [
+                          
+                {
+                //name: '确诊',
+                type: 'line',
+                yAxisIndex: 0,
+                xAxisIndex: 0,
+                lineStyle:{
+                    color: 'rgba(255,0,0,1)'
+                },
+                itemStyle:{
+                    color: 'rgba(255,0,0,1)'
+                },
+                encode:{
+                 x:'date',
+                 y:'确诊',
+                 seriesName: [1]   
+                }
+                },
+                {
+                //name: '疑似',
+                type: 'line',
+                yAxisIndex: 0,
+                xAxisIndex: 0,
+                lineStyle:{
+                    color: '#FF8c00'
+                },
+                itemStyle:{
+                    color: '#FF8c00'
+                },
+                encode:{
+                 x:'date',
+                 y:'疑似',
+                 seriesName: [2]  
+                }
+                }, 
+                {
+                //name: '死亡',
+                type: 'bar',
+                yAxisIndex: 1,
+                xAxisIndex: 1,
+                barGap: '-100%', // Make series be overlap
+                barWidth: '40%',
+                itemStyle:{
+                    color: 'rgba(0,0,0,0.75)'
+                },
+                encode:{
+                 x:'date',
+                 y:'死亡',
+                 seriesName: [3]  
+                }
+                },
+                {
+                //name: '治愈',
+                type: 'bar',
+                yAxisIndex: 1,
+                xAxisIndex: 1,
+                barWidth: '40%',
+                itemStyle:{
+                    color: 'rgba(0,153,102,0.5)'
+                },                
+                encode:{
+                 x:'date',
+                 y:'治愈',
+                 seriesName: [4]
+                }
+                }                    
+
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
