@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="echarts.min.js"></script>
+	<script src = "world.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1280px;height:720px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+		var name_title = "2018年世界各国GDP (万亿)"
+        var mapName = 'world'
+        var data = [
+        //{ name: 'China', value: 7830 },
+			{ name: 'United States', value: 20.54 },
+			{ name: 'China', value: 13.61 },
+			{ name: 'Japan', value: 4.97 },
+			{ name: 'Germany', value: 3.95 },
+			{ name: 'United Kingdom', value: 2.86 },
+			{ name: 'France', value: 2.78 },
+			{ name: 'India', value: 2.72 },
+			{ name: 'Italy', value: 2.08 },
+			{ name: 'Brazil', value: 1.87 },
+			{ name: 'Canada', value: 1.71 },
+			{ name: 'Russia', value: 1.66 },
+			{ name: 'Korea', value: 1.62 },
+			{ name: 'Australia', value: 1.43 },
+			{ name: 'Spain', value: 1.42 },
+			{ name: 'Mexico', value: 1.22 },
+
+        ];
+        
+        var option = {
+            title: {
+                text: name_title,
+                x: 'center',
+                textStyle: {
+                    fontSize: 24
+                },                
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: function(params) {                        
+                        var toolTiphtml = ''
+						if (isNaN(params.value)){
+						toolTiphtml = params.name + ' 暂无数据';
+                        }
+						else{
+						toolTiphtml = params.name + ' GDP: ' + params.value + '万亿';
+                        }
+						//console.log(toolTiphtml)                        
+                        return toolTiphtml;                   
+                }
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            visualMap: {
+                show: true,
+                left: 'left',
+                top: 'bottom',
+                seriesIndex: [0],
+                type:'piecewise',
+                pieces:[
+                    {min:20, color: 'rgb(254,57,101)'},
+                    {min:10, max:20, color: 'rgb(252,157,154)'},
+                    {min:4, max:10, color: 'rgb(249,205,173)'},
+                    {min:2, max:4, color: 'rgb(200,200,169)'},
+                    {min:0, max:2, color: 'rgb(131,175,155)'}
+                ],            
+                textStyle: {
+                    color: '#000000'
+                }
+            },            
+            geo: {
+                show: true,
+                map: mapName,
+                label: {
+                    normal: {
+                        show: false,
+                        fontSize:12,
+                    },
+                    emphasis: {
+                        show: false,
+                    }
+                },
+                roam: true,
+                itemStyle: {
+                    normal: {
+                        areaColor: '#F6F6F6',
+                        borderColor: '#666666',
+                    },
+                    emphasis: {
+                        areaColor: '#0099CC',
+                    }
+                }
+            },
+            series: [
+                {
+                    type: 'map',
+                    map: mapName,
+                    geoIndex: 0,           
+                    animation: false,
+                    data: data
+                },
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
