@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="echarts.min.js"></script>
+	<script src = "world.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1280px;height:720px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+		var name_title = "新型冠状病毒疫情世界地图"
+        var mapName = 'world'
+        var data = [
+        //{ name: 'China', value: 7830 },
+//insertData//
+        ];
+        
+        var option = {
+            title: {
+                text: name_title,
+                x: 'center',
+                textStyle: {
+                    fontSize: 24
+                },                
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: function(params) {                        
+                        var toolTiphtml = ''
+						if (isNaN(params.value)){
+						toolTiphtml = params.name + '确诊: 0例';
+                        }
+						else{
+						toolTiphtml = params.name + '确诊: ' + params.value + '例';
+                        }
+						//console.log(toolTiphtml)                        
+                        return toolTiphtml;                   
+                }
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            visualMap: {
+                show: true,
+                left: 'left',
+                top: 'bottom',
+                seriesIndex: [0],
+                type:'piecewise',
+                pieces:[
+                    {min:20, color: 'rgb(254,57,101)'},
+                    {min:15, max:19, color: 'rgb(252,157,154)'},
+                    {min:10, max:14, color: 'rgb(249,205,173)'},
+                    {min:5, max:9, color: 'rgb(200,200,169)'},
+                    {min:1, max:4, color: 'rgb(131,175,155)'}
+                ],            
+                textStyle: {
+                    color: '#000000'
+                }
+            },            
+            geo: {
+                show: true,
+                map: mapName,
+                label: {
+                    normal: {
+                        show: false,
+                        fontSize:12,
+                    },
+                    emphasis: {
+                        show: false,
+                    }
+                },
+                roam: true,
+                itemStyle: {
+                    normal: {
+                        areaColor: '#F6F6F6',
+                        borderColor: '#666666',
+                    },
+                    emphasis: {
+                        areaColor: '#0099CC',
+                    }
+                }
+            },
+            series: [
+                {
+                    type: 'map',
+                    map: mapName,
+                    geoIndex: 0,           
+                    animation: false,
+                    data: data
+                },
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
