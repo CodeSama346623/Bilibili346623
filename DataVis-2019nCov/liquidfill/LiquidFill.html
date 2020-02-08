@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="echarts.min.js"></script>
+	<script src="echarts-liquidfill.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 800px;height:600px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+		data = 0
+        var option = {
+			title:{
+				text:'Echarts水滴图',
+				left:'center',
+				textStyle:{
+					fontSize: 24
+				}
+				
+			},
+			series: [{
+				type: 'liquidFill',
+				data:[data/100, (data-2)/100, (data-4)/100],
+				outline: {
+					show: false
+				}
+			}]
+		};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+		
+		// 定时器刷新数据及图形
+		var clk = window.setInterval("clkFunc()", 2000);
+		function clkFunc(){
+			dataStep = 10;
+			if (data < 100){
+				data = data + dataStep;
+				option.series[0].data = [data/100, (data-5)/100, (data-10)/100];
+				//console.log(data);
+			}else{
+				data = 0;
+				option.series[0].data = [0, 0, 0];
+				//console.log(data);
+			};
+			myChart.setOption(option);
+		};
+		
+    </script>
+</body>
+</html>
